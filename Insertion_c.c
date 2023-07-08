@@ -86,6 +86,14 @@ void delete_pos(struct node **head, int pos) {
 	current->next = temp->next;
 	free(temp);
 }
+void delete_whole(struct node** head) {
+	struct node* current = *head;
+	while (current != NULL) {//until current becomes null
+		current = current->next;
+		free(*head);
+		*head = current;
+	}
+}
 int main() {
 	struct node* head = NULL;
 //insertion at the ending
@@ -106,6 +114,8 @@ int main() {
 	delete_end(&head);
 //delete from specified position
 	delete_pos(&head, pos); //pos=2;
+//delete whole node
+        delete_whole(&head);
 
 	printing(head);
 }
@@ -113,6 +123,3 @@ int main() {
 //delete from beg=60 40 10 20 30
 //delete from end=60 40 10 20
 //delete form the pos=60 10 20
-
-
-

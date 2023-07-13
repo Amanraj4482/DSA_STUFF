@@ -1,6 +1,7 @@
 //Implemeting the data by the array
-#include<bits/stdc++.h>
-using namespace std;
+#include<stdio.h>
+#include<stdbool.h>
+#include<stdlib.h>
 //we should have the array to store the data of the stack
 
 //The blueprint of stack

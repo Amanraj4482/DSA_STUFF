@@ -1,4 +1,3 @@
-
 //INFIX TO POSTFIX
 
 #include<stdlib.h>
@@ -12,7 +11,7 @@ struct Stack {
 	char *arr;
 };
 struct Stack* create_stack(int _capacity) {
-	struct Stack * new_stack = (struct Stack*)malloc (sizeof(char));
+	struct Stack * new_stack = (struct Stack*)malloc (sizeof(struct Stack));
 	new_stack->capacity = _capacity;
 	new_stack->top = -1;
 	new_stack->arr = (char*)malloc(new_stack->capacity * (sizeof(char)));
@@ -24,7 +23,7 @@ int isFull(struct Stack * new_stack) {
 void push(struct Stack* new_stack, char value) {
 	//is it full?
 	if (isFull(new_stack)) {
-		printf("Stack is full");
+		printf("Stack is full\n");
 		return;
 	}
 	new_stack->arr[++new_stack->top] = value;
@@ -76,13 +75,13 @@ void infixTopostfix(const char* infix , char* postfix) {
 	struct Stack* new_stack = create_stack(max);
 	int i, j = 0;
 	char ch, x;
-	for (int i = 0; infix[i] != '\0'; ++i)
+	for ( i = 0; infix[i] != '\0'; i++)
 	{
 		ch = infix[i];
 		if (isOperand(ch)) {
 			postfix[j++] = ch;
 		}
-		if (ch == '(') {
+		else if (ch == '(') {
 			push(new_stack, ch);
 		}
 		else if (ch == ')') {
@@ -107,7 +106,7 @@ void infixTopostfix(const char* infix , char* postfix) {
 	free(new_stack);
 }
 int main() {
-	
+
 	char infix[max], postfix[max];
 	fgets(infix, sizeof(infix), stdin);
 	infixTopostfix(infix, postfix);
@@ -115,3 +114,6 @@ int main() {
 
 	return 0;
 }
+
+//input ->  ((p+(q*r))-s)
+//output ->  pqr*+s-

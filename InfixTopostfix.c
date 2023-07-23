@@ -1,4 +1,23 @@
 //INFIX TO POSTFIX
+//K + L - M*N(O^P)*W / U / V*T + Q
+
+//if the operators are between the oprands then it is knows as the infix
+//if the operators are after the operands then it is knows as the postfix
+
+//we need to scan only once to convert the infix expression to the postfix
+
+//if opening bracket come then direct push without checking
+//~if any oprands come then we will directly write it into the output
+//~if the operator then push into the stack
+//__________________ if the operator is of higher precedance then the operator which is on the top of the stack then direct & associativity should be left to right
+//in case of right to left & same operators then associativity we keep pushing into the stack without thinking
+//__________________if the operator is lesser precedance then pop out the operator which is at top of the stack and again check it
+//_________________if the precedance is equal or lesser then again pop it..if higher is then push it..
+//no need to check any precedance while pussing the operator in the stack coming after the opening brackets
+//if we get the right bracket then pop out all the operators till the opening brackets
+
+
+
 
 #include<stdlib.h>
 #include<stdio.h>
@@ -117,3 +136,5 @@ int main() {
 
 //input ->  ((p+(q*r))-s)
 //output ->  pqr*+s-
+
+

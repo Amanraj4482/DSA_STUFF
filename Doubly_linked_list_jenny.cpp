@@ -1,3 +1,5 @@
+//doubly linked list
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -47,10 +49,25 @@ void insert_at_pos(struct node** head, struct node** tail, int value, int index)
 	current->next = new_node;
 	new_node->next->prev = new_node;
 }
+void reverse(struct node** head, struct node** tail) {
+//swapping the prev and next value of the current node
+	struct node* current = *head;
+	struct node* current2 = *head;
+	while (current != NULL) {
+		current2 = current->next;//current2 is pointing just after the current node
+		current->next = current->prev;
+		current->prev = current2;
+		current = current2;
+	}
+	current = *head; //current pointing to the head
+	*head = *tail; //head points to the tail
+	*tail = current; //tail points to the head
+
+}
 void printing(struct node* head) {
 	struct node* current = head;
 	while (current != NULL) {
-		printf("%d\n", current->data);
+		printf("%d ", current->data);
 		current = current->next;
 	}
 }
@@ -63,10 +80,13 @@ int main() {
 	insert_at_beg(&head,  22);
 	insert_at_beg(&head,  24);
 
-
 	int index = 2;
 	insert_at_pos(&head, &tail, 60, index);
+	reverse(&head, &tail);
 	printing(head);
 	return 0;
 }
+
+//24 22 60 19 20 21 without reversing
+// 21 20 19 60 22	with reversing
 

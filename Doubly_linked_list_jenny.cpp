@@ -49,21 +49,31 @@ void insert_at_pos(struct node** head, struct node** tail, int value, int index)
 	current->next = new_node;
 	new_node->next->prev = new_node;
 }
+
+//THERE IS MISTAKE IN THIS CODE IT'S PRINING THE FIRST NODE DATA
 void reverse(struct node** head, struct node** tail) {
 //swapping the prev and next value of the current node
 	struct node* current = *head;
-	struct node* current2 = *head;
+	struct node* next_node;
 	while (current != NULL) {
-		current2 = current->next;//current2 is pointing just after the current node
+		next_node = current->next;//next_node is pointing just after the current node
 		current->next = current->prev;
-		current->prev = current2;
-		current = current2;
+		current->prev = next_node;
+		current = next_node;
 	}
-	current = *head; //current pointing to the head
-	*head = *tail; //head points to the tail
-	*tail = current; //tail points to the head
+	current = *head; 	//current pointing to the head
+	*head = *tail; 		//head points to the tail
+	*tail = current; 	//tail points to the head
 
+
+	//REVERSE PRINTING OF THE DOUBLLY LINKED LIST
+	// struct node* temp = *tail;
+	// while (temp != NULL) {
+	// 	printf("%d ", temp->data);
+	// 	temp = temp->prev;
+	// }
 }
+
 void printing(struct node* head) {
 	struct node* current = head;
 	while (current != NULL) {

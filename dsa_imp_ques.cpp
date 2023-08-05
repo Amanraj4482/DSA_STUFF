@@ -61,11 +61,7 @@ int main() {
 
 
 2. Write a program array the element of array in assending and desecending order? in
-
-
-using the bubble sort algorithm to sort in asceding and desending order
-
-
+~  using the bubble sort algorithm to sort in asceding and desending order
 #include<bits/stdc++.h>
 using namespace std;
 void bubbleAscending(int arr[], int size) {
@@ -117,3 +113,33 @@ int main() {
 1 3 5 6 2 8 7
 1 2 3 5 6 7 8
 8 7 6 5 3 2 1
+
+
+
+3.Write a program to add a element into an array? Write a program to add a element into an array?
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main() {
+	int size , n, pos;
+	size = 5;
+	int arr[5] = {1, 2, 3, 4, 5};
+	n = 7, pos = 3;
+	// shift element to the right to make space for the new element
+	for (int i = size; i < pos; --i)
+	{
+		arr[i] = arr[i - 1];
+	}
+	arr[pos] = n;
+	size++;
+	// updated array
+	for (int i = 0; i < size; ++i)
+	{
+		printf("%d ", arr[i]);
+	}
+
+	return 0;
+}
+1 2 3 7 5 3
+

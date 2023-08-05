@@ -120,7 +120,7 @@ typedef struct stack {
 } Stack ;
 
 //creating the stack of type struct stack
-Stack * create_node(int _capacity) {
+Stack * create_stack(int _capacity) {
 	//creating a new stack
 	Stack *new_stack = (Stack *)malloc( sizeof(Stack));
 	new_stack->capacity = _capacity;
@@ -174,7 +174,7 @@ void printing(Stack * new_stack) {
 }
 int main() {
 	//creating the new_stack with the creating_stack function and with the capacity
-	Stack * new_stack = create_node(100);
+	Stack * new_stack = stack(100);
 	push(new_stack, 10);
 	push(new_stack, 20);
 	push(new_stack, 30);

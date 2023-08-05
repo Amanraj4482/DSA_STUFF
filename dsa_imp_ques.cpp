@@ -143,3 +143,139 @@ int main() {
 }
 1 2 3 7 5 3
 
+4. write an program to push or delete element in stack by linked list and array
+
+#include<bits/stdc++.h>
+using namespace std;
+typedef struct node {
+	int data;
+	struct node * next;
+} Node;
+
+typedef struct stack {
+	Node * top;
+} Stack;
+
+Node * create_node(int value) {
+	Node * new_node = (Node *)malloc(sizeof(Node));
+	new_node->next = NULL;
+	new_node->data = value;
+	return new_node;
+}
+
+Stack * create_stack() {
+	Stack * new_stack = (Stack*)malloc(sizeof(Stack));
+	new_stack->top = NULL;
+	return new_stack;
+}
+int isEmpty(Stack * new_stack) {
+	return new_stack->top == NULL;
+}
+void push_beg(Stack * new_stack, int value) {
+	// creating a node
+	Node * new_node = create_node(value);
+	new_node->next = new_stack->top; // new_stack means the head
+	new_stack->top = new_node;
+}
+int pop (Stack * new_stack) {
+	// checking the underflow condition
+	if (isEmpty(new_stack)) {
+		printf("Underflow\n");
+		return 0;
+	}
+	Node * temp = new_stack->top;
+	int a = temp->data;
+	new_stack->top = new_stack->top->next;
+	free(temp);
+	return a;
+}
+void printing(Stack * new_stack) {
+	if (isEmpty(new_stack)) {
+		printf(" Stack is empty");
+		return ;
+	}
+	Node* current = new_stack->top;
+	while (current != NULL) {
+		printf("%d ", current->data);
+		current = current->next;
+	}
+}
+int main() {
+	Stack * new_stack = create_stack();
+	push_beg(new_stack, 10);
+	push_beg(new_stack, 20);
+	push_beg(new_stack, 30);
+	push_beg(new_stack, 40);
+
+	printing(new_stack);
+	printf("pop-> %d\n ", pop(new_stack));
+
+	return 0;
+}
+40 30 20 10 pop-> 40
+
+
+~stack using the array
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef struct node {
+	int top;
+	int capacity;
+	int * arr;
+} Stack;
+// creating a stack
+Stack * create_stack(int capacity) {
+	Stack * new_stack = (Stack*)malloc(sizeof(Stack));
+	new_stack->top = -1;
+	new_stack->capacity = capacity;
+	new_stack->arr = (int*)malloc(sizeof(4));
+	return new_stack;
+}
+
+int isFull(Stack * new_stack) {
+	return new_stack->top == new_stack->capacity - 1;
+}
+int isEmpty(Stack * new_stack) {
+	return new_stack->top == -1;
+}
+void push(Stack* new_stack, int value) {
+//checking is it full
+	if (isFull(new_stack)) {
+		printf("full stack ");
+		return;
+	}
+	// now assecing the array
+	new_stack->arr[++new_stack->top] = value;
+}
+int pop(Stack * new_stack) {
+	//checking is it empty
+	if (isEmpty(new_stack)) {
+		printf("empty stack");
+		return 0;
+	}
+	//pop out the first element present in the stack
+	//first pointing the top to the second last element then removing the last one
+	return new_stack->arr[new_stack->top--];
+}
+void printing(Stack * new_stack) {
+	//checking the empty stack
+	if (isEmpty(new_stack))
+		return;
+	for (int i = new_stack->top; i > -1; i--) {//we have to traverse back
+		printf("%d ", new_stack->arr[i]);
+	}
+}
+int main() {
+	//creating the new_stack with the creating_stack function and with the capacity
+	Stack * new_stack = create_stack(100);
+	push(new_stack, 10);
+	push(new_stack, 20);
+	push(new_stack, 30);
+	push(new_stack, 40);
+	pop(new_stack);
+	printing(new_stack);
+	return 0;
+}
+30 20 10

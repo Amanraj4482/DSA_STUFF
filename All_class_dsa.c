@@ -930,6 +930,58 @@ void insert_at_end(Node ** head, int value) {
 	//update the *head prev to the new_node next which is last
 	(*head)->prev = new_node;
 }
+void destroy_beg(Node ** head) {
+	Node * current = *head;
+	Node * last_node = (*head)->prev;
+	// for the single node present in the list
+	if ((*head)->next == *head) {
+		*head = last_node = NULL;
+		free(current);
+	}
+	// more than one node present in the list
+	else {
+		*head = (*head)->next;
+		(*head)->prev = last_node;
+		last_node->next = *head;
+		free(current);
+	}
+}
+void destroy_end(Node ** head) {
+	Node * last_node = (*head)->prev;
+	Node * current = last_node;
+	// for the single node present in the list
+	if ((*head)->next == *head) {
+		*head = last_node = NULL;
+		free(current);
+	}
+// more than one node present in the list
+	last_node = last_node->prev;
+	// last_node is pointing to the second last node
+	// we will store the address of the first node
+	last_node->next = (*head);
+	(*head)->prev = last_node;
+	free(current);
+}
+void destroy_pos(Node ** head, int pos ) {
+	Node * current = *head;
+	Node * last_node = (*head)->prev;
+	int i = 1;
+	while (i < pos) {
+		current = current->next;
+		i++;
+	}
+	// i am at pos =2
+	current->prev->next = current->next;
+	current->next->prev = current->prev;
+	// the node which i want to delete is the last node pos
+	if (current->next == *head) {
+		last_node = current->prev;
+		free(current);
+	}
+	else {
+		free(current);
+	}
+}
 void printing(Node * head) {
 	Node * current = head;
 	while (1) {

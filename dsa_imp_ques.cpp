@@ -117,31 +117,23 @@ int main() {
 
 
 3.Write a program to add a element into an array? Write a program to add a element into an array?
-
-#include<bits/stdc++.h>
-using namespace std;
-
-int main() {
-	int size , n, pos;
-	size = 5;
-	int arr[5] = {1, 2, 3, 4, 5};
-	n = 7, pos = 3;
-	// shift element to the right to make space for the new element
-	for (int i = size; i < pos; --i)
-	{
-		arr[i] = arr[i - 1];
-	}
-	arr[pos] = n;
+#include <stdio.h>
+int main()
+{
+	int arr[100] = { 0 };
+	int i, x = 7, pos = 3, size = 5;
+	for (i = 0; i < 10; i++)
+		arr[i] = i + 1;
 	size++;
-	// updated array
-	for (int i = 0; i < size; ++i)
-	{
+	for (i = size - 1; i >= pos; i--)
+		arr[i] = arr[i - 1];
+	arr[pos - 1] = x;
+	for (i = 0; i < size; i++)
 		printf("%d ", arr[i]);
-	}
-
 	return 0;
 }
-1 2 3 7 5 3
+// 1 2 3 4 5 //input
+// 1 2 7 3 4 5 //output
 
 4. write an program to push or delete element in stack by linked list and array
 

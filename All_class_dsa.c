@@ -140,6 +140,162 @@ delete_whole(&head);
 // reversed =30 20 10 40 60 50
 
 
+
+//----------------------------------doubly circular linked list--------------------------
+#include<bits/stdc++.h>
+using namespace std;
+typedef struct node {
+	int data;
+	struct node * next;
+	struct node * prev;
+} Node ;
+
+Node * create_node (int value) {
+	Node * new_node = (Node* )malloc ( sizeof(Node));
+	new_node->next = NULL;
+	new_node->prev = NULL;
+	new_node->data = value;
+	return new_node;
+}
+void insert_at_beg(Node ** head, int value) {
+	Node * new_node = create_node(value);
+	//cheking if the linked list is empty if empty then we are inserting the
+	//first node
+	if (*head == NULL) {
+		*head = new_node; //as this the only node in the list
+		//set the 'next' and 'prev' to point itself because of only node in the list
+		new_node->next = new_node;
+		new_node->prev = new_node;
+		return;
+	}
+	//if the linked list is not empty containg the a node
+	//find the last node of the list
+
+	//1.create the last node next -> point to the * head -> prev
+	Node * last_node = (*head)->prev;
+	//give the first node address to the new_node
+	new_node->next = *head;
+	//point the address of the new_node to the current head prev
+	(*head)->prev = new_node;
+	//linking the new_node to the last node
+	new_node->prev = last_node;
+	//and also last node next should pointes to the new_node
+	last_node->next = new_node;
+	//make the head pointer to point to the first node which is new node
+	*head = new_node;
+}
+
+void insert_at_end(Node ** head, int value) {
+	//create a new node
+	Node * new_node = create_node(value);
+	//if the list is empty then we are inserting the first node
+	if (*head == NULL) {
+		*head = new_node;
+		//since there is single node they are pointing to itself
+		new_node->next = new_node;
+		new_node->prev = new_node;
+		return;
+	}
+	//list containg the single node
+	//find the last node it should be point to the *head ->prev
+	Node * last_node = (*head)->prev;
+	//giving the address of the new_node to last node next
+	//effectively inserting the node at the end
+	last_node->next = new_node;
+	//point the new_node  prevto the last node
+	new_node->prev = last_node;
+	//new_node next should point to the current head node
+	new_node->next = *head;
+	//update the *head prev to the new_node next which is last
+	(*head)->prev = new_node;
+}
+
+void insert_at_pos(Node ** head, int value, int pos) {
+	Node * new_node = create_node(value);
+	Node * current = *head;
+	int i = 1;
+	while (i < pos - 1) {
+		current = current->next;
+		i++;
+	}
+	// i am stading at the pos 2 after this only i will insert the node
+	new_node->prev = current;
+	new_node->next = current->next;
+	current->next = new_node;
+	new_node->next->prev = new_node;
+}
+void deletion_at_beg(Node ** head) {
+	Node *current = *head;
+	Node * last_node = (*head);
+	// for one node in the list
+	if (current->next == *head) { //pointing to itself
+		(*head) = NULL;
+		free(current);
+		return ;
+	}
+	while (last_node->next != (*head)) {
+		last_node = last_node->next;
+	}
+	*head = current->next; // Move head to the next node
+	last_node->next = *head; // Update last node's next to point to the new head
+	free(current); // Free the memory of the first node
+}
+void deletion_at_end(Node ** head) {
+	Node *current = *head;
+	Node * last_node = (*head);
+	// for one node in the list
+	if (current->next == *head) { //pointing to itself
+		(*head) = NULL;
+		free(current);
+		return ;
+	}
+	while (last_node->next != (*head)) {
+		current = last_node;
+		last_node = last_node->next;
+	}
+	// Update the second-to-last node's next pointer to point to the head
+	current->next = *head;
+	free(last_node); // Free the memory of the last node
+}
+void deletion_at_pos(Node **head, int pos) {
+	Node* current = *head;
+	Node* prev = NULL;
+	// traverse ot find the node at the given postion
+	int i = 1;
+	while (i < pos && current->next != *head) {
+		prev = current;
+		current = current->next;
+		i++;
+	}
+	// i am standing at the pos =2
+	prev->next = current->next;
+	free(current);
+}
+void printing(Node * head) {
+	Node * current = head;
+	while (1) {
+		printf("%d\n", current->data);
+		current = current->next;
+		if (current == head) {
+			break;
+		}
+	}
+}
+int main() {
+	Node * head = NULL;
+	insert_at_beg(&head, 10);
+	insert_at_beg(&head, 20);
+	insert_at_beg(&head, 30);
+	insert_at_end(&head, 50);
+	insert_at_end(&head, 60);
+	insert_at_pos(&head, 1, 3);
+	deletion_at_beg(&head);
+	deletion_at_end(&head);
+	deletion_at_pos(&head, 2);
+	printing(head);
+	return 0;
+}
+
 //STACK USING THE ARRAY---------------------------------------------------------------------------------------------------------------------------
 
 #include<bits/stdc++.h>

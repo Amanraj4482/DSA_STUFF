@@ -885,6 +885,11 @@ int main() {
 	printing(head);
 	return 0;
 }
+11 23 12 13 15
+23 12 13 15 first node deletion
+23 12 13 _last_node deletion
+23 13 deletion at the pos =2
+
 //When inserting at end, you need to link the last node's 'next' pointer to the new node, and then update the 'next'pointer of the new node to point back to the head
 
 

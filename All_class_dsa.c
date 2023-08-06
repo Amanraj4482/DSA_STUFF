@@ -999,7 +999,9 @@ int main() {
 	insert_at_beg(&head, 30);
 	insert_at_end(&head, 50);
 	insert_at_end(&head, 60);
+	destroy_beg(&head);
+	destroy_end(&head);
+	destroy_pos(&head, 2);
 	printing(head);
 	return 0;
 }
-

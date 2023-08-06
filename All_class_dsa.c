@@ -755,7 +755,6 @@ int main() {
 //CIRCULAR LINKED LIST==================================================================================================================
 
 
-//LAST NEXT =HEAD
 #include<bits/stdc++.h>
 using namespace std;
 typedef struct node {
@@ -765,98 +764,126 @@ typedef struct node {
 
 Node * create_node(int value) {
 	Node * new_node = (Node*)malloc(sizeof(Node));
-	new_node->data = value;
 	new_node->next = NULL;
+	new_node->data = value;
 	return new_node;
 }
-//METHOD 1 ----------
-// void insert_at_beg(Node **head, int value) {
-// 	Node *new_node = create_node(value);
-// 	if (*head == NULL) {
-// 		*head = new_node;
-// 		new_node->next = *head;
-// 	} else {
-// 		new_node->next = (*head)->next;
-// 		(*head)->next = new_node;
-// 	}
-// 	*head = new_node;
-// }
-// update the next pointers of the current head node and the last node to include the new node.
 
-//METHOD 2------------
-void insert_at_beg(Node ** head, int value) {
+void push_beg(Node **head, int value) {
 	Node *new_node = create_node(value);
+
 	if (*head == NULL) {
-		*head = new_node;
-		//my head is the new node is created
-		new_node->next = *head;//new_node =*head same thing
+		*head = new_node;// the new_node becomes the head node
+		new_node->next = *head;// and it's head pointer is set to point itself
 		return;
 	}
-	//if linked list has some nodes
-	//current is acting as the last node
-	Node* current = *head;
-	while (current->next != *head) {
-		current = current->next;
+	// if list is not empty
+	else {
+		new_node->next = (*head)->next;
+		(*head)->next = new_node;
 	}
-	//updating the last node next pointer to point the new node
-	current->next = new_node; //not to create the last node
-
-	//update the next pointer of the new node to point to the current head
-	new_node->next = *head;
-
-	//update the head pointer to the point the new node
-	*head = new_node;
 }
-void insert_at_end(Node ** head, int value ) {
+void push_end(Node **head, int value) {
+	Node *new_node = create_node(value);
+
+	if (*head == NULL) {
+		*head = new_node;// the new_node becomes the head node
+		new_node->next = *head;// and it's head pointer is set to point itself
+		return;
+	}
+	// if list is not empty
+	// the last node should cotain the address of the first node
+	else {
+		new_node->next = (*head)->next;
+		(*head)->next = new_node;
+		(*head) = new_node;
+	}
+}
+void push_pos(Node ** head, int value, int pos) {
 	Node * new_node = create_node(value);
-	if (*head == NULL) {
-		*head = new_node;
-		new_node->next = *head;
-		return;
+	int i = 1;
+	(*head) = (*head)->next;
+	while (i < pos - 1) {
+		(*head) = (*head)->next;
 	}
-	Node * current = *head;
-	while (current->next != *head) {
-		current = current->next;
-	}
-	current->next = new_node;
-	new_node->next = *head;
-
+	// reached before the pos
+	// update the right link first
+	new_node->next = (*head)->next;
+	(*head)->next = new_node;
 }
-void printing(Node * head) {
+void printing(Node *head ) {
 	if (head == NULL) {
 		return;
 	}
-	Node *current = head;
+	Node * current = head;
 	while (1) {
 		printf("%d ", current->data);
 		current = current->next;
 		if (current == head) {
 			break;
-			//exiting the loop when we reach the head again
+			// existing the loop when we reach the head again
 		}
 	}
 }
-void insert_at_pos(Node ** head, int value, int index) {
-	Node * new_node = create_node(value);
-	Node * current = *head;
-	int i = 0;
-	while (i == index - 1 && current->next != *head) {
+void deletion_at_beg(Node ** head) {
+	Node *current = *head;
+	Node * last_node = (*head);
+	// for one node in the list
+	if (current->next == *head) { //pointing to itself
+		(*head) = NULL;
+		free(current);
+		return ;
+	}
+	while (last_node->next != (*head)) {
+		last_node = last_node->next;
+	}
+	*head = current->next; // Move head to the next node
+	last_node->next = *head; // Update last node's next to point to the new head
+	free(current); // Free the memory of the first node
+}
+void deletion_at_end(Node ** head) {
+	Node *current = *head;
+	Node * last_node = (*head);
+	// for one node in the list
+	if (current->next == *head) { //pointing to itself
+		(*head) = NULL;
+		free(current);
+		return ;
+	}
+	while (last_node->next != (*head)) {
+		current = last_node;
+		last_node = last_node->next;
+	}
+	// Update the second-to-last node's next pointer to point to the head
+	current->next = *head;
+	free(last_node); // Free the memory of the last node
+}
+void deletion_at_pos(Node **head, int pos) {
+	Node* current = *head;
+	Node* prev = NULL;
+	// traverse ot find the node at the given postion
+	int i = 1;
+	while (i < pos && current->next != *head) {
+		prev = current;
 		current = current->next;
 		i++;
 	}
-	new_node->next = current->next;
-	current->next = new_node;
-
+	// i am standing at the pos =2
+	prev->next = current->next;
+	free(current);
 }
 int main() {
 	Node * head = NULL;
-	insert_at_end(&head, 10);
-	insert_at_end(&head, 20);
-	insert_at_beg(&head, 30);
-	insert_at_beg(&head, 40);
-	insert_at_pos(&head, 70, 2);
-
+	push_beg(&head, 12);
+	push_beg(&head, 11);
+	push_end(&head, 13);
+	push_end(&head, 15);
+	push_pos(&head, 23, 2);
+	deletion_at_beg(&head);
+	deletion_at_end(&head);
+	deletion_at_pos(&head, 2);
 	printing(head);
+	return 0;
 }
 //When inserting at end, you need to link the last node's 'next' pointer to the new node, and then update the 'next'pointer of the new node to point back to the head
 

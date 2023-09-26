@@ -23,8 +23,8 @@ void printArray(struct Node * treeArray, int n ){
 
 int main() 
 {
-  struct Node treeArray = [maxi];// storing the nodes
-  for(int i =0;i<n;i++) 
+  struct Node treeArray[maxi];// storing the nodes
+  for(int i =0;i<maxi;i++) 
   treeArray[i].data=-1;
    
    
@@ -38,3 +38,4 @@ int main()
    printArray(treeArray,6);
     return 0;
 }
+//1 2 3 4 5 6 

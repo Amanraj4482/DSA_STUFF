@@ -82,3 +82,8 @@ int main() {
   printArray(treeArray, 6);
   return 0;
 }
+
+
+//algorithm for the inorder traversal
+1. create a stack 
+2. 

@@ -95,7 +95,7 @@ int main() {
     3.3 curr = st.pop()
     3.4 result = curr->data;
     3.5 curr = curr->right
-4 return result 
+4. return result 
 
 
 
@@ -110,6 +110,6 @@ algorithm for the preorder traversal
     3.2 if(st.empty()) break
     3.2 curr = st.pop()
     3.4 curr = curr->right
-    3.5 
-4 return result 
+   
+4. return result 
 

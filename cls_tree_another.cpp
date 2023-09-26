@@ -91,8 +91,25 @@ int main() {
     3.1 while(curr!=null) 
         3.1.1 st.push = curr-data;
         3.1.2  curr = curr ->left;
-    3.2 if(st.empty()) 
-    3.2 curr = st.pop()
+    3.2 if(st.empty())  break
+    3.3 curr = st.pop()
     3.4 result = curr->data;
     3.5 curr = curr->right
 4 return result 
+
+
+
+algorithm for the preorder traversal
+1. create a stack 
+2. initilize the curr= root;
+3. while(1)
+    3.1 while(curr!=null) 
+        3.1.1  result = curr->data;
+        3.1.2  st.push = curr-data;
+        3.1.3  curr = curr->left;
+    3.2 if(st.empty()) break
+    3.2 curr = st.pop()
+    3.4 curr = curr->right
+    3.5 
+4 return result 
+

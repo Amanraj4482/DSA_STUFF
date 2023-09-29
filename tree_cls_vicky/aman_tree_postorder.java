@@ -32,7 +32,7 @@ class TreeNode {
     }
 }
 
-public class PostOrderTraversal {
+public class Main {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         if (root == null)
@@ -75,7 +75,7 @@ public class PostOrderTraversal {
         root.left.right = new TreeNode(5);
 
         // Perform post-order traversal
-        PostOrderTraversal traversal = new PostOrderTraversal();
+        Main traversal = new Main();
         List<Integer> result = traversal.postorderTraversal(root);
 
         // Print the result

@@ -2,21 +2,15 @@
     
 1.create nodes for the stack 
 2.initilize the curr= root;
-3.initilze the (TreeNode) prev node = null ;
+3.create result of Interger type
 4. while(true)
     4.1. while(curr !=null)
-          4.1.1. stack.push(curr)
-          4.1.2. curr = curr.left
+          4.1.1. result.add(current.data)
+	  4.1.2. st.push(current)
+          4.1.3. curr = curr.left
     4.2 if(st.isEmpty()) break;
-    4.3 while(curr==null && st.isEmpty()!=0)
-          4.3.1. curr = st.peek()
-          4.3.2. if(curr.right == null || curr.right== prev)
-                  4.3.2.1. result.add(curr)
-                  4.3.2.2. stack.pop()
-                  4.3.2.3. prev= curr;
-                  4.3.2.4. curr = null 
-          4.3.3. else 
-                  4.3.3.1. curr = curr.right
+    4.3 curr = st.pop();
+    4.4 curr = curr.right();
 5.return result ;
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -24,22 +18,17 @@
     
 1.create nodes for the stack 
 2.initilize the curr= root;
-3.initilze the (TreeNode) prev node = null ;
+3.create result of Interger type
 4. while(true)
     4.1. while(curr !=null)
-          4.1.1. stack.push(curr)
+	  4.1.1. st.push(current)
           4.1.2. curr = curr.left
     4.2 if(st.isEmpty()) break;
-    4.3 while(curr==null && st.isEmpty()!=0)
-          4.3.1. curr = st.peek()
-          4.3.2. if(curr.right == null || curr.right== prev)
-                  4.3.2.1. result.add(curr)
-                  4.3.2.2. stack.pop()
-                  4.3.2.3. prev= curr;
-                  4.3.2.4. curr = null 
-          4.3.3. else 
-                  4.3.3.1. curr = curr.right
+    4.3result.add(current.data)
+    4.4 curr = st.pop();
+    4.5 curr = curr.right();
 5.return result ;
+
 
 ------------------------------------------------------------------------------------------------------------------------
 <------------------------------POST ORDER TRAVERSAL ALGORITHM------------------------------>

@@ -168,4 +168,56 @@ class Test  {
 
 --------------------------------------------------------------------------------------------------
 	29.09
+
+
+
+
+	import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int x) {
+        val = x;
+    }
+}
+
+class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null)
+            return result;
+
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+        TreeNode prev = null;
+
+        while (true) {
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+
+            if (stack.isEmpty())
+                break;
+
+            current = stack.peek();
+
+            if (current.right == null || current.right == prev) {
+                result.add(current.val);
+                stack.pop();
+                prev = current;
+                current = null;
+            } else {
+                current = current.right;
+            }
+        }
+
+        return result;
+    }
+}
 	

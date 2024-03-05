@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define max 100
+struct Stack {
+	int capacity;
+	int top;
+	char *arr;
+};
+struct Stack* create_stack(int _capacity) {
+	struct Stack * new_stack = (struct Stack*)malloc (sizeof(struct Stack));
+	new_stack->capacity = _capacity;
+	new_stack->top = -1; // this indicates the top of the stack
+	//dynamically allocating the array
+	new_stack->arr = (char*)malloc(new_stack->capacity * (sizeof(char)));
+	return new_stack;
+}
+int isFull(struct Stack * new_stack) {
+	return new_stack->top == new_stack->capacity - 1;
+}
+int isEmpty(struct Stack * new_stack) {
+	return new_stack->top == -1;
+}
+void push(struct Stack* new_stack, char value) {
+  if (isFull(new_stack)) {
+		printf("Stack is full\n");
+		return;
+	}
+	new_stack->arr[++new_stack->top] = value;
+}
+char pop(struct Stack* new_stack) {
+  if (isEmpty(new_stack)) {
+		printf("Yes it is Empty\n");
+		return '\0';
+	}
+	return new_stack->arr[new_stack->top--];
+}
+int evaluatePostfix(char *postfix)
+{
+	struct Stack *newstack = create_stack(max);
+	int i,val1,val2,result;
+	char ch;
+	for(i=0;postfix[i]!='\0';i++)
+	{
+		ch = postfix[i];
+		if(isdigit(ch))
+		{
+			push(newstack,ch-'0');
+		}
+		else
+		{
+			val1=pop(newstack);
+			val2=pop(newstack);
+			switch(ch)
+			{
+				case '+':
+					result=val2+val1;
+					break;
+				case '-':
+					result=val2-val1;
+					break;
+				case '*':
+					result=val2*val1;
+					break;
+				case '/':
+					result=val2/val1;
+					break;
+				case '%':
+					result=val2%val1;
+					break;
+				case '^':
+					result=val2^val1;
+					break;
+				default :
+					printf("Invalid operator\n");
+					
+			}
+			push(newstack,result);
+		}
+	}
+	result = pop(newstack);
+	return result;
+}
+int main() 
+{ 
+    char postfix[max];
+    fgets(postfix, sizeof(postfix), stdin);
+    printf("Solution = %d",evaluatePostfix(postfix));
+
+    return 0;
+}

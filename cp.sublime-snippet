@@ -1,0 +1,28 @@
+<snippet>
+	<content><![CDATA[
+#include <bits/stdc++.h>
+using namespace std;
+#define L(_,a,n) for(int _= a; _< (n); ++_)
+#define L1(_,a,n) for(int _= a; _<=(n); ++_)
+#define endl "\n"
+#ifndef ONLINE_JUDGE
+#include "debug.h"
+#else
+#define p(...);
+#endif
+void solve() {
+	$0	
+}
+signed main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("error.txt", "w", stderr);
+#endif
+	int t; cin >> t; while (t--) {solve(); cerr << endl;}
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>cp</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
